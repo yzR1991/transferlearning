@@ -32,7 +32,7 @@ def test(model, target_test_loader):
     correct = 0
     criterion = torch.nn.CrossEntropyLoss()
     len_target_dataset = len(target_test_loader.dataset)
-    with torch.no_grad():
+    with torch.no_grad(): #不需要gradient，关闭以节约算力与内存
         for data, target in target_test_loader:
             data, target = data.to(DEVICE), target.to(DEVICE)
             s_output = model.predict(data)
