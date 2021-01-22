@@ -24,7 +24,7 @@ parser.add_argument('--data', type=str, default='/home/jindwang/mine/data/office
 parser.add_argument('--early_stop', type=int, default=20) #提前终止
 parser.add_argument('--lamb', type=float, default=10)
 parser.add_argument('--trans_loss', type=str, default='mmd')
-args = parser.parse_args()
+args = parser.parse_args() #参数解析器，方便用来存储所有需要的模型参数
 
 def test(model, target_test_loader):
     model.eval()
