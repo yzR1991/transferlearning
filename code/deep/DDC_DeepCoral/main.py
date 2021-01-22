@@ -38,7 +38,7 @@ def test(model, target_test_loader):
             s_output = model.predict(data)
             loss = criterion(s_output, target)
             test_loss.update(loss.item())
-            pred = torch.max(s_output, 1)[1]
+            pred = torch.max(s_output, 1)[1] #max(,1)按每行取最大值，输出是tuple：每行最大值的集合，与每行最大值的index
             correct += torch.sum(pred == target)
     acc = 100. * correct / len_target_dataset
     return acc
