@@ -55,12 +55,12 @@ def train(source_loader, target_train_loader, target_test_loader, model, optimiz
         train_loss_transfer = utils.AverageMeter()
         train_loss_total = utils.AverageMeter()
         model.train()
-        iter_source, iter_target = iter(source_loader), iter(target_train_loader)
+        iter_source, iter_target = iter(source_loader), iter(target_train_loader) #使用迭代器
         n_batch = min(len_source_loader, len_target_loader)
         criterion = torch.nn.CrossEntropyLoss()
         for _ in range(n_batch):
             data_source, label_source = iter_source.next()
-            data_target, _ = iter_target.next()
+            data_target, _ = iter_target.next() #等等，这个_啥玩意？target到底有没有label？
             data_source, label_source = data_source.to(
                 DEVICE), label_source.to(DEVICE)
             data_target = data_target.to(DEVICE)
