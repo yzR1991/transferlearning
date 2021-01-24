@@ -60,14 +60,14 @@ def train(source_loader, target_train_loader, target_test_loader, model, optimiz
         criterion = torch.nn.CrossEntropyLoss()
         for _ in range(n_batch):
             data_source, label_source = iter_source.next()
-            data_target, _ = iter_target.next() #等等，这个_啥玩意？target到底有没有label？
+            data_target, _ = iter_target.next() #target其实是有label的（不然没法验证），但是这里暂时不需要
             data_source, label_source = data_source.to(
                 DEVICE), label_source.to(DEVICE)
             data_target = data_target.to(DEVICE)
 
             optimizer.zero_grad()
-            label_source_pred, transfer_loss = model(data_source, data_target)
-            clf_loss = criterion(label_source_pred, label_source)
+            label_source_pred, transfer_loss = model(data_source, data_target) #前者是源域的预测结果；后者是俩域之间『距离』，取决于当前是mmd还是coral
+            clf_loss = criterion(label_source_pred, label_source) #源域上分类误差，默认是交叉熵
             loss = clf_loss + args.lamb * transfer_loss
             loss.backward()
             optimizer.step()
