@@ -21,7 +21,7 @@ parser.add_argument('--n_epoch', type=int, default=100) #循环次数
 parser.add_argument('--momentum', type=float, default=0.9)
 parser.add_argument('--decay', type=float, default=5e-4)
 parser.add_argument('--data', type=str, default='/home/jindwang/mine/data/office31') #需要调整数据集路径
-parser.add_argument('--early_stop', type=int, default=20) #提前终止
+parser.add_argument('--early_stop', type=int, default=40) #提前终止
 parser.add_argument('--lamb', type=float, default=10)
 parser.add_argument('--trans_loss', type=str, default='mmd')
 args = parser.parse_args() #参数解析器，方便用来存储所有需要的模型参数
