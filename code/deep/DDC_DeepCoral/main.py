@@ -37,7 +37,7 @@ def test(model, target_test_loader):
             data, target = data.to(DEVICE), target.to(DEVICE)
             s_output = model.predict(data)
             loss = criterion(s_output, target)
-            test_loss.update(loss.item())
+            test_loss.update(loss.item()) #这个test_loss干嘛的？下面也没见用
             pred = torch.max(s_output, 1)[1] #max(,1)按每行取最大值，输出是tuple：每行最大值的集合，与每行最大值的index
             correct += torch.sum(pred == target)
     acc = 100. * correct / len_target_dataset
@@ -68,7 +68,7 @@ def train(source_loader, target_train_loader, target_test_loader, model, optimiz
             optimizer.zero_grad()
             label_source_pred, transfer_loss = model(data_source, data_target) #前者是源域的预测结果；后者是俩域之间『距离』，取决于当前是mmd还是coral
             clf_loss = criterion(label_source_pred, label_source) #源域上分类误差，默认是交叉熵
-            loss = clf_loss + args.lamb * transfer_loss
+            loss = clf_loss + args.lamb * transfer_loss #混合loss，trade-off参数默认为10
             loss.backward()
             optimizer.step()
             train_loss_clf.update(clf_loss.item())
