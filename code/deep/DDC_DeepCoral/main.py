@@ -90,8 +90,9 @@ def train(source_loader, target_train_loader, target_test_loader, model, optimiz
     
 
 def load_data(src, tar, root_dir):
-    folder_src = os.path.join(root_dir, src)
-    folder_tar = os.path.join(root_dir, tar)
+    s = 'images'
+    folder_src = os.path.join(root_dir, src, s)
+    folder_tar = os.path.join(root_dir, tar, s)
     source_loader = data_loader.load_data(
         folder_src, args.batchsize, True, {'num_workers': 4})
     target_train_loader = data_loader.load_data(
