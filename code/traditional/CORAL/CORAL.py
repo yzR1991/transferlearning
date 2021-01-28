@@ -56,4 +56,4 @@ if __name__ == '__main__':
                 Xs, Ys, Xt, Yt = src_domain['feas'], src_domain['label'], tar_domain['feas'], tar_domain['label']
                 coral = CORAL()
                 acc, ypre = coral.fit_predict(Xs, Ys, Xt, Yt)
-                print(acc)
+                print(domains[i], 'to', domains[j], ':', acc)
