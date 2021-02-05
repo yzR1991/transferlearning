@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-
-
+#MMD算法可参考ICML的DAN
+#具体细节可画图示意
 class MMD_loss(nn.Module):
     def __init__(self, kernel_type='rbf', kernel_mul=2.0, kernel_num=5):
         super(MMD_loss, self).__init__()
